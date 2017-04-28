@@ -1,2 +1,2 @@
 # TeduShop-THV
-Hoc Lam Web Ban ASP.NET MVC - Code First
+Hoc Lam Web Bang ASP.NET MVC - Code First
