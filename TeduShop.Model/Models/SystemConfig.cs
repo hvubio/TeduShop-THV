@@ -17,6 +17,7 @@ namespace TeduShop.Model.Models
 
         [MaxLength(50)]
         public string StringValue { get; set; }
+
         public int? IntValue { get; set; }
     }
 }
