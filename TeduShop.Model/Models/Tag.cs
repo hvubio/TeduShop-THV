@@ -10,6 +10,7 @@ namespace TeduShop.Model.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [MaxLength(50)]
+        [Column(TypeName = "varchar")]
         public string Id { get; set; }
 
         [Required]
