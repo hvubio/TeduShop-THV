@@ -5,7 +5,7 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Repositories
 {
-    public interface IProductCategoryRepository : IRepository<ProductCategory>
+    public interface IProductCategoryRepository
     {
         IEnumerable<ProductCategory> GetByAlias(string alias);
     }
