@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace TeduShop.Data.Infrastructure
 {
-    public interface IRepository<T> where T : class 
+    public interface IRepository<T> where T : class
     {
         //Marks an entity as new
         void Add(T entity);
@@ -33,6 +33,5 @@ namespace TeduShop.Data.Infrastructure
         int Count(Expression<Func<T, bool>> where);
 
         bool CheckContains(Expression<Func<T, bool>> predicate);
-
     }
 }
