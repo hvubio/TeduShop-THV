@@ -15,6 +15,8 @@ namespace TeduShop.Data.Infrastructure
         //Marks an entity to be removed
         void Delete(T entity);
 
+        void Delete(int id);
+
         //Delete multi records
         void DeleteMutli(Expression<Func<T, bool>> where);
 
