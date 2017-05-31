@@ -24,7 +24,6 @@ namespace TeduShop.Model.Models
         public int? ParentId { get; set; }
         public int? DisplayOrder { get; set; }
 
-        [Required]
         public string Image { get; set; }
 
         public bool? HomeFlag { get; set; }
