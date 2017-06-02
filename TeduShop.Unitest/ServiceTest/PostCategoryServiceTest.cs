@@ -14,7 +14,7 @@ namespace TeduShop.Unitest.ServiceTest
         private Mock<IPostCategoryRepository> _mockRepository;
         private Mock<IUnitOfWork> _mockUnitOfWork;
         private List<PostCategory> _postCategories;
-        private IPostCategorySerice _postCategorySerice;
+        private IPostCategoryService _postCategorySerice;
 
         [TestInitialize]
         public void Initialize()
