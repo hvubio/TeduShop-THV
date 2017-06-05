@@ -23,19 +23,10 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
+                var category = _postCategoryService.GetAll();
 
-                if (ModelState.IsValid)
-                {
-                    var category = _postCategoryService.GetAll();
-                    
-                    response = request.CreateResponse(HttpStatusCode.Created);
-                }
-                else
-                {
-                    request.CreateResponse(HttpStatusCode.OK, ModelState);
-                }
-
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK,category);
+                
                 return response;
             });
         }

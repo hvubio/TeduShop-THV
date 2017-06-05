@@ -9,7 +9,7 @@ namespace TeduShop.Data.Repositories
 
     public class ErrorRepository : RepositoryBase<Error>, IErrorRepository
     {
-        protected ErrorRepository(IDbFactory dbFactory) : base(dbFactory)
+        public ErrorRepository(IDbFactory dbFactory) : base(dbFactory)
         {
         }
     }
