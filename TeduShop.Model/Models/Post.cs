@@ -30,8 +30,7 @@ namespace TeduShop.Model.Models
 
         public bool HomeFlag { get; set; }
         public bool HotFlag { get; set; }
-        public bool Status { get; set; }
-
+        
         [ForeignKey("CategoryId")]
         public virtual PostCategory PostCategory { get; set; }
 
