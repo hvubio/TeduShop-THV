@@ -21464,7 +21464,7 @@ function nullFormRenameControl(control, name) {
  *  forms with failing validators, where:
  *
  *  - keys are validation tokens (error names),
- *  - values are arrays of controls or forms that have a failing validator for given error name.
+ *  - values are arrays of controls or forms that have a failing validatorService for given error name.
  *
  *  Built-in validation tokens:
  *
@@ -26123,7 +26123,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  *
  * @property {Object.<string, function>} $validators A collection of validators that are applied
  *      whenever the model value changes. The key value within the object refers to the name of the
- *      validator while the function refers to the validation operation. The validation operation is
+ *      validatorService while the function refers to the validation operation. The validation operation is
  *      provided with the model value as an argument and must return a true or false value depending
  *      on the response of that validation.
  *
@@ -26142,7 +26142,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  *      is expected to return a promise when it is run during the model validation process. Once the promise
  *      is delivered then the validation status will be set to true when fulfilled and false when rejected.
  *      When the asynchronous validators are triggered, each of the validators will run in parallel and the model
- *      value will only be updated once all validators have been fulfilled. As long as an asynchronous validator
+ *      value will only be updated once all validators have been fulfilled. As long as an asynchronous validatorService
  *      is unfulfilled, its key will be added to the controllers `$pending` property. Also, all asynchronous validators
  *      will only run once all synchronous validators have passed.
  *
@@ -26169,8 +26169,8 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  *     view value has changed. It is called with no arguments, and its return value is ignored.
  *     This can be used in place of additional $watches against the model value.
  *
- * @property {Object} $error An object hash with all failing validator ids as keys.
- * @property {Object} $pending An object hash with all pending validator ids as keys.
+ * @property {Object} $error An object hash with all failing validatorService ids as keys.
+ * @property {Object} $pending An object hash with all pending validatorService ids as keys.
  *
  * @property {boolean} $untouched True if control has not lost focus yet.
  * @property {boolean} $touched True if control has lost focus.
@@ -26410,7 +26410,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * However, in most cases it should be sufficient to use the `ngModel.$validators` and
    * `ngModel.$asyncValidators` collections which will call `$setValidity` automatically.
    *
-   * @param {string} validationErrorKey Name of the validator. The `validationErrorKey` will be assigned
+   * @param {string} validationErrorKey Name of the validatorService. The `validationErrorKey` will be assigned
    *        to either `$error[validationErrorKey]` or `$pending[validationErrorKey]`
    *        (for unfulfilled `$asyncValidators`), so that it is available for data-binding.
    *        The `validationErrorKey` should be in camelCase and will get converted into dash-case
@@ -26705,7 +26705,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
         var promise = validator(modelValue, viewValue);
         if (!isPromiseLike(promise)) {
           throw ngModelMinErr('nopromise',
-            "Expected asynchronous validator to return a promise but got '{0}' instead.", promise);
+            "Expected asynchronous validatorService to return a promise but got '{0}' instead.", promise);
         }
         setValidity(name, undefined);
         validatorPromises.push(promise.then(function() {
@@ -26755,7 +26755,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     $timeout.cancel(pendingDebounce);
 
     // If the view value has not changed then we should just exit, except in the case where there is
-    // a native validator on the element. In this case the validation state may have changed even though
+    // a native validatorService on the element. In this case the validation state may have changed even though
     // the viewValue has stayed empty.
     if (ctrl.$$lastCommittedViewValue === viewValue && (viewValue !== '' || !ctrl.$$hasNativeValidators)) {
       return;
@@ -30356,7 +30356,7 @@ var styleDirective = valueFn({
  *
  * @description
  *
- * ngRequired adds the required {@link ngModel.NgModelController#$validators `validator`} to {@link ngModel `ngModel`}.
+ * ngRequired adds the required {@link ngModel.NgModelController#$validators `validatorService`} to {@link ngModel `ngModel`}.
  * It is most often used for {@link input `input`} and {@link select `select`} controls, but can also be
  * applied to custom controls.
  *
@@ -30365,7 +30365,7 @@ var styleDirective = valueFn({
  * cannot use interpolation inside `required`. See the {@link guide/interpolation interpolation guide}
  * for more info.
  *
- * The validator will set the `required` error key to true if the `required` attribute is set and
+ * The validatorService will set the `required` error key to true if the `required` attribute is set and
  * calling {@link ngModel.NgModelController#$isEmpty `NgModelController.$isEmpty`} with the
  * {@link ngModel.NgModelController#$viewValue `ngModel.$viewValue`} returns `true`. For example, the
  * `$isEmpty()` implementation for `input[text]` checks the length of the `$viewValue`. When developing
@@ -30433,10 +30433,10 @@ var requiredDirective = function() {
  *
  * @description
  *
- * ngPattern adds the pattern {@link ngModel.NgModelController#$validators `validator`} to {@link ngModel `ngModel`}.
+ * ngPattern adds the pattern {@link ngModel.NgModelController#$validators `validatorService`} to {@link ngModel `ngModel`}.
  * It is most often used for text-based {@link input `input`} controls, but can also be applied to custom text-based controls.
  *
- * The validator sets the `pattern` error key if the {@link ngModel.NgModelController#$viewValue `ngModel.$viewValue`}
+ * The validatorService sets the `pattern` error key if the {@link ngModel.NgModelController#$viewValue `ngModel.$viewValue`}
  * does not match a RegExp which is obtained by evaluating the Angular expression given in the
  * `ngPattern` attribute value:
  * * If the expression evaluates to a RegExp object, then this is used directly.
@@ -30539,10 +30539,10 @@ var patternDirective = function() {
  *
  * @description
  *
- * ngMaxlength adds the maxlength {@link ngModel.NgModelController#$validators `validator`} to {@link ngModel `ngModel`}.
+ * ngMaxlength adds the maxlength {@link ngModel.NgModelController#$validators `validatorService`} to {@link ngModel `ngModel`}.
  * It is most often used for text-based {@link input `input`} controls, but can also be applied to custom text-based controls.
  *
- * The validator sets the `maxlength` error key if the {@link ngModel.NgModelController#$viewValue `ngModel.$viewValue`}
+ * The validatorService sets the `maxlength` error key if the {@link ngModel.NgModelController#$viewValue `ngModel.$viewValue`}
  * is longer than the integer obtained by evaluating the Angular expression given in the
  * `ngMaxlength` attribute value.
  *
@@ -30625,10 +30625,10 @@ var maxlengthDirective = function() {
  *
  * @description
  *
- * ngMinlength adds the minlength {@link ngModel.NgModelController#$validators `validator`} to {@link ngModel `ngModel`}.
+ * ngMinlength adds the minlength {@link ngModel.NgModelController#$validators `validatorService`} to {@link ngModel `ngModel`}.
  * It is most often used for text-based {@link input `input`} controls, but can also be applied to custom text-based controls.
  *
- * The validator sets the `minlength` error key if the {@link ngModel.NgModelController#$viewValue `ngModel.$viewValue`}
+ * The validatorService sets the `minlength` error key if the {@link ngModel.NgModelController#$viewValue `ngModel.$viewValue`}
  * is shorter than the integer obtained by evaluating the Angular expression given in the
  * `ngMinlength` attribute value.
  *
