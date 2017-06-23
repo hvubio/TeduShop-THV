@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TeduShop.Data.Infrastructure;
 using TeduShop.Data.Repositories;
 using TeduShop.Model.Models;
@@ -20,6 +15,7 @@ namespace TeduShop.Service
         PostCategory GetById(int id);
         void Save();
     }
+
     public class PostCategoryService : IPostCategoryService
     {
         private readonly IPostCategoryRepository _postCategoryRepository;
@@ -53,7 +49,7 @@ namespace TeduShop.Service
 
         public IEnumerable<PostCategory> GetALlByParentiD(int parentId)
         {
-            return _postCategoryRepository.GetMulti(x=>x.ParentId == parentId && x.Status);
+            return _postCategoryRepository.GetMulti(x => x.ParentId == parentId && x.Status);
         }
 
         public PostCategory GetById(int id)

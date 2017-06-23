@@ -55,10 +55,18 @@ namespace TeduShop.Web
                 .Where(t => t.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces().InstancePerRequest();
 
+//            builder.RegisterAssemblyTypes(typeof(ProductCategoryRepository).Assembly)
+//                .Where(t => t.Name.EndsWith("Repository"))
+//                .AsImplementedInterfaces().InstancePerRequest();
+
             //Service
             builder.RegisterAssemblyTypes(typeof(PostCategoryService).Assembly)
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces().InstancePerRequest();
+
+//            builder.RegisterAssemblyTypes(typeof(ProductCategoryService).Assembly)
+//                .Where(t => t.Name.EndsWith("Serivce"))
+//                .AsImplementedInterfaces().InstancePerRequest();
 
             IContainer container = builder.Build();
 
