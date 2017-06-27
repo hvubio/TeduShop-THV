@@ -3,7 +3,7 @@
 
     apiService.$inject = ["$http"];
 
-    function apiService() {
+    function apiService($http) {
         return {
             get: get
         };

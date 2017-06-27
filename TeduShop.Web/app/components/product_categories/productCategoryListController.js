@@ -1,7 +1,24 @@
 ﻿(function(app) {
     app.controller("productCategoryListController", productCategoryListController);
 
-    function productCategoryListController() {
-        
+    productCategoryListController.$inject = ["$scope", "apiService"];
+
+    function productCategoryListController($scope, apiService) {
+        $scope.productCategories = [];
+
+        $scope.getProductCategories = getProductCategories;
+
+        function getProductCategories() {
+            apiService.get("/api/productcategory/getall",
+                null,
+                function(result) {
+                    $scope.productCategories = result.data;
+                },
+                function() {
+                    console.log("Log product category failed");
+                });
+        }
+
+        getProductCategories();
     }
 })(angular.module("tedushop.productCategory"))
