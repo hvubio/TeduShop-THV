@@ -17,7 +17,6 @@
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Danh mục sản phẩm</h3>
-
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fa fa-minus"></i>
@@ -28,6 +27,14 @@
             </div>
         </div>
         <div class="box-body">
+            <div class="input-group margin col-md-4">
+                <input ng-model="keyword" type="text" name="q" class="form-control" placeholder="Tìm kiếm...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat" ng-click="search()"><i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+           
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">
@@ -55,8 +62,13 @@
                                 <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
-                        
+                        <tfoot>
+                        <tr>
+                            <td colspan="5">Tổng số bản ghi: {{totalCount}}</td>
+                        </tr>
+                        </tfoot>
                     </table>
+                    
                 </div>
             </div>
         </div>
